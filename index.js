@@ -1,23 +1,15 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 
+//middlewares
 app.use(cors());
 app.use(express.json());
 
-////////////////////////
-
-//fitbazzDBUser
-//t5y3yQTfBRgBm8EY
-//t5y3yQTfBRgBm8EY
-
-// console.log(process.env.DB_USER)
-// console.log(process.env.DB_PASS)
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.g3rb4ny.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pt0wvrl.mongodb.net/?retryWrites=true&w=majority`;
 
 // console.log(uri)
 
@@ -29,9 +21,9 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    const serviceCollection = client.db('fitBazz').collection('services');
-    const addCollection = client.db('fitBazz').collection('add');
-    const orderCollection = client.db('fitBazz').collection('orders');
+    const serviceCollection = client.db('warmupDB').collection('services');
+    const addCollection = client.db('warmupDB').collection('add');
+    const orderCollection = client.db('warmupDB').collection('orders');
 
     //const reviewCollection=client.db('fitBazz').collection('reviews')
 
@@ -132,11 +124,10 @@ async function run() {
 
 run().catch((err) => console.error(err));
 
-// ////////////////////
 app.get('/', (req, res) => {
-  res.send('Fitbazz server running.');
+  res.send('Warm Up Server is Running.');
 });
 
 app.listen(port, () => {
-  console.log(`server running on port: ${port}`);
+  console.log(`Warm Up Server Running on Port: ${port}`);
 });
